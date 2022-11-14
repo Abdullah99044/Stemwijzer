@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <title>StemWijzer</title>
+
+    <style>
+
+        body{
+            background-image: url(afbeeldingen/image.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        footer{
+
+            box-shadow: 2px 2px 5px black;
+            padding: 20px;
+            background-color: purple;
+            color: white;
+            position: absolute;
+            text-align: center;
+            bottom: 0;
+            width: 100%;
+     
+        }
+
+    </style>
+
+    <script src="data.js"> </script>
+    <script src="webApp.js"></script>
+
+</head>
+<body>
+    
+
+    <header class="w3-container  w3-indigo" >
+        <h1 class="w3-cursive" >Stemwijzer </h1>
+    </header>
+
+
+    <article>
+
+        <div id="start" class="w3-container w3-white w3-margin w3-padding-16" >
+
+            
+
+            <h2>Stemwijzer</h2>
+
+            <p>Stemwijzer Tweede Kamer 2022</p>
+
+            <p>Test uw poilitieke voorkeur aan de hand van 30 stelling</p>
+
+            
+
+            <button onclick="hideTheStart()" class="w3-button  w3-indigo"  >start</button>
+        
+        </div>
+
+        <div style="display:none" id="1" class="w3-container w3-white w3-margin w3-padding-16">
+
+
+            <h2>vraag 1</h2>
+
+            <p>content</p>
+
+            <p>content</p>
+
+            <button onclick="HideTheStar()" class="w3-button  w3-indigo"  >Eens</button>
+
+            <button onclick="HideTheStar()" class="w3-button  w3-indigo"  >Oneens</button>
+
+            <button onclick="HideTheStar()" class="w3-button  w3-indigo"  >Geen van beide</button>
+
+        </div>
+
+    </article>
+
+    <footer class="w3-container  w3-indigo" >
+        <p>Copyright</p>
+    </footer>
+</body>
+</html>
