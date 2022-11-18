@@ -45,36 +45,49 @@
 
     <article>
 
-        <div id="start" class="w3-container w3-white w3-margin w3-padding-16" >
-
-            
+        <div  class="w3-container w3-white w3-margin w3-padding-16"  > 
 
             <h2>Stemwijzer</h2>
 
-            <p>Stemwijzer Tweede Kamer 2022</p>
+            <div>
 
-            <p>Test uw poilitieke voorkeur aan de hand van 30 stelling</p>
+                <p id="statmentNum" ></p>
 
+            </div>
+
+            <div id="start">
+
+                <p>Stemwijzer Tweede Kamer 2022</p>
+
+                <p>Test  </p>
+
+                <button onclick="hideTheStart()" class="w3-button  w3-indigo"  >start</button>
             
+            </div>
 
-            <button onclick="hideTheStart()" class="w3-button  w3-indigo"  >start</button>
-        
-        </div>
+            <div style="display:none" id="1" class="w3-container w3-white w3-margin w3-padding-16">
+                 
+                <p id="title" >   </p>
 
-        <div style="display:none" id="1" class="w3-container w3-white w3-margin w3-padding-16">
+                <p id="statment" >   </p>
+
+                <button   onclick="answerEens()" class="w3-button  w3-indigo"  >Eens</button>
+
+                <button   onclick="answerOnEens()" class="w3-button  w3-indigo"  >Oneens</button>
+
+                <button   onclick="answerGeen()" class="w3-button  w3-indigo"  >Geen van beide</button>
+
+                <button   onclick="hideTheStart()" class="w3-button  w3-indigo"  >Sla deze vraag over</button>
+
+            </div>
+
+            <div style="display:none" id="resultButton" class="w3-container w3-white w3-margin w3-padding-16">
+                 
+                <p id="3" >   </p>
+                <button   onclick="results()" class="w3-button  w3-indigo"  > resultaten </button>
 
 
-            <h2>vraag 1</h2>
-
-            <p>content</p>
-
-            <p>content</p>
-
-            <button onclick="HideTheStar()" class="w3-button  w3-indigo"  >Eens</button>
-
-            <button onclick="HideTheStar()" class="w3-button  w3-indigo"  >Oneens</button>
-
-            <button onclick="HideTheStar()" class="w3-button  w3-indigo"  >Geen van beide</button>
+            </div>
 
         </div>
 
