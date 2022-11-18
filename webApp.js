@@ -14,7 +14,7 @@ for (let x in parties) {
     partijen.push(parties[x].name);
 }
 
-console.log(partijen);
+ 
 
 
 // ################################################
@@ -36,11 +36,105 @@ for (let x in subjects ) {
 
 // ################################################
 
+// Hier slag ik op partijen positions bij elke statment
+
+// ################################################
+
+
+var proPartijen     =   [];
+var contraPartijen  =   [];
+var nonePartijen    =   [];
+
+
+function partijenPostion(){
+
+    
+    for(let x in subjects){
+
+        let pro = [];
+        let contra = [];
+        let none = [];
+
+       
+        for(let i in  subjects[x].parties ){
+
+            let meaning = subjects[x].parties[i].position;
+
+
+            if(meaning == "pro"){
+                pro.push(subjects[x].parties[i].name);
+            }
+
+            
+            if(meaning == "contra"){
+                contra.push(subjects[x].parties[i].name);
+            }
+
+
+            
+            if(meaning == "none"){
+                none.push(subjects[x].parties[i].name);
+            }
+
+           
+        }
+
+        proPartijen.push(pro);
+        contraPartijen.push(contra);
+        nonePartijen.push(none);
+    }
+}
+
+// ################################################
+
+// Find the most party
+
+// ################################################
+
+
+
+
+// ################################################
+
+
+var  resultatPartijen = []
+
+function resultatenBereknen(){
+
+    
+    let num = 0;
+
+    for(let x in antworden){
+
+        if(antworden[num] == "eens"){
+            resultatPartijen.push(proPartijen[num]);
+        }
+
+        if(antworden[num] == "oneens"){
+            resultatPartijen.push(contraPartijen[num]);
+        }
+
+        if(antworden[num] == "geen"){
+            resultatPartijen.push(nonePartijen[num]);
+        }
+
+        num++;
+
+    }
+
+    let counts = {};
+    let partijen = resultatPartijen.flat(1);
+    partijen.forEach(function (x) { counts[x] = (counts[x] || 0) + 1; });
+
+    return Object.entries(counts).sort((a,b) => b[1]-a[1]);
+     
+}
+
+
+// ################################################
+
 
 var antworden = [];
-
-
- 
 
 var vragenNummer = 0;
 
@@ -71,6 +165,14 @@ function hideTheStart(){
         document.getElementById('1').style.display='none'
         document.getElementById('statmentNum').style.display='none'
         document.getElementById('resultButton').style.display='block'
+        partijenPostion();
+        
+         
+        console.log(resultatenBereknen());
+         
+
+        
+        
     }
     
     vragenNummer++;
@@ -95,11 +197,22 @@ function answerGeen(){
     
 }
 
-console.log(antworden);
+var proParies = [];
+
+function stemmerParies(){
+
+
+     
+
+}
 
 
 
 
+
+ 
+ 
+ 
 
 
   
