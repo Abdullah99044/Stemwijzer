@@ -134,23 +134,60 @@ function resultatenBereknen(){
 // ################################################
 
 
+
+
 var antworden = [];
 
-var vragenNummer = 0;
+var vragenNummer = -1;
 
-function hideTheStart(){
 
-    document.getElementById('start').style.display='none'
+ 
+
+function nextOrback(value){
+
+    if(value == true){
+        return hideAndDisplay(true);
+    }
+    
+    if(value == false){
+        return hideAndDisplay(false);
+        
+    }
+     
+
+    
+
+}
+
+
+function hideAndDisplay(value){
+
+    if(value == false){
+        
+        vragenNummer++;
+    }else{
+        vragenNummer--;
+    }
 
     var statmentNummer = statements[vragenNummer];
 
+    document.getElementById('start').style.display='none'
+
+
     if(statmentNummer < 31){
 
-
+       
         
         var title = subjects[vragenNummer].title;
         var statment = subjects[vragenNummer].statement;
 
+        if(vragenNummer  > 0){
+            document.getElementById('Treug').style.display='block'
+        }
+        
+        if(vragenNummer == 0) {
+            document.getElementById('Treug').style.display='none'
+        }  
 
         // satments nummer
         document.getElementById('statmentNum').innerHTML =  statmentNummer + " / " + statements.slice(-1);
@@ -159,6 +196,8 @@ function hideTheStart(){
 
         document.getElementById('title').innerHTML    = title
         document.getElementById('statment').innerHTML = statment
+
+        
 
     }else{
 
@@ -175,25 +214,28 @@ function hideTheStart(){
         
     }
     
-    vragenNummer++;
+    console.log(vragenNummer);
 
+    
 }
 
 
+
 function answerEens(){
+    
     antworden.push("eens");
-    return hideTheStart();
+    return nextOrback(false);
     
 }
 
 function answerOnEens(){
     antworden.push("oneens");
-    return hideTheStart();
+    return nextOrback(false);
 }
 
 function answerGeen(){
     antworden.push("geen");
-    return hideTheStart();
+    return nextOrback(false);
     
 }
 
