@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,11 +18,13 @@
 
         footer{
 
+            display: block;
+            margin-top: 90px;
             box-shadow: 2px 2px 5px black;
             padding: 20px;
             background-color: purple;
             color: white;
-            position: absolute;
+            
             text-align: center;
             bottom: 0;
             width: 100%;
@@ -83,16 +85,50 @@
 
                 <button   onclick="nextOrback(false)" class="w3-button  w3-indigo"  >Sla deze vraag over</button>
 
-            </div>
-
-            <div style="display:none" id="resultButton" class="w3-container w3-white w3-margin w3-padding-16">
-                 
-                <p id="3" >   </p>
-                <button   onclick="results()" class="w3-button  w3-indigo"  > resultaten </button>
-
+                <button   onclick="watVindDePartijen()" class="w3-button  w3-indigo"  >Wat vind de partijen </button>
 
             </div>
 
+             
+
+
+            <div style="display:none" id="partijenPosition" class="w3-container w3-white w3-margin w3-padding-16" >
+
+                <h2 id="proParijenTitle">Pro partijen</h2>
+
+                <div id="proParijenList">
+                </div>
+
+                <h2 id="contraParijenTitle">Tegen partijen</h2>
+
+                <div id="contraParijenList">
+                </div>
+
+                <h2 id="nonePartijenTitle">None partijen</h2>
+
+                <div id="nonePartijenList">
+                </div>
+
+            </div>
+
+            <div style="display:none" id="partijenFilteren"  class="w3-container w3-white w3-margin w3-padding-16" >
+
+                <input type="checkbox" name="secularePartijen" id="secularePartijen" >
+                <label for="secularePartijen">Wil je allen seculare partijen tonnen? </label>
+                <input type="checkbox" name="grotePartijen" id="grotestePartijen" >
+                <label for="grotePartijen">Wil je allen de grote partijen tonnen? </label>
+
+                <button onclick="resultatenTonen()" class="w3-button  w3-indigo"  > Resultaten</button>
+            </div>
+
+            <div style="display:none" id="reultaten"  class="w3-container w3-white w3-margin w3-padding-16" >
+
+                <h2 id="reultaatTitle"></h2>
+
+                <ul id="reultaatPartijen">
+
+                </ul>
+            </div>
         </div>
 
     </article>
