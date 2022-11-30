@@ -77,11 +77,11 @@
 
                 <p id="statment" >   </p>
 
-                <button   onclick="answerEens()" class="w3-button  w3-indigo"  >Eens</button>
+                <button   id="eens" onclick="antwordenGeven('eens')"  class="w3-button  w3-indigo"   >Eens</button>
 
-                <button   onclick="answerOnEens()" class="w3-button  w3-indigo"  >Oneens</button>
+                <button   id="oneens" onclick="antwordenGeven('oneens')" class="w3-button  w3-indigo"  >Oneens</button>
 
-                <button   onclick="answerGeen()" class="w3-button  w3-indigo"  >Geen van beide</button>
+                <button   id="geen" onclick="antwordenGeven('geen')" class="w3-button  w3-indigo"  >Geen van beide</button>
 
                 <button   onclick="nextOrback(false)" class="w3-button  w3-indigo"  >Sla deze vraag over</button>
 
@@ -120,7 +120,23 @@
 
                 <button onclick="resultatenTonen()" class="w3-button  w3-indigo"  > Resultaten</button>
             </div>
+            <div style="display:none" id="extraGewichtVragenList"  class="w3-container w3-white w3-margin w3-padding-16" >
 
+
+                <button onclick="nextOrback(false)"  class="w3-button  w3-indigo" >Volgende</button>
+
+                <ul id="extraGewichtVragen">
+
+                    
+
+                </ul>
+
+                
+                
+
+
+
+            </div>
             <div style="display:none" id="reultaten"  class="w3-container w3-white w3-margin w3-padding-16" >
 
                 <h2 id="reultaatTitle"></h2>

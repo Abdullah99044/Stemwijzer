@@ -239,6 +239,8 @@ function resultatenTonen(){
         html += document.getElementById("reultaatTitle").innerHTML = title ;
         html += document.getElementById("reultaatPartijen").innerHTML = list ;
 
+        window.sessionStorage.setItem("antworden" , JSON.stringify(antworden));
+
         
         return html;
     } 
@@ -267,23 +269,28 @@ function hideAndDisplay(value){
         
         vragenNummer++;
     }else{
+        antworden.pop();
         vragenNummer--;
     }
 
 
     let statments =  statementTelen();
-    let statmentNum =  vragenNummer + 1;
+    
 
-    document.getElementById('start').style.display='none'
-    document.getElementById('partijenPosition').style.display='none'
+    let html = " ";
+
+    html += document.getElementById('start').style.display='none';
+    html += document.getElementById('partijenPosition').style.display='none';
 
     if(vragenNummer < 0 ){
-        document.getElementById('start').style.display='block'
-        document.getElementById('Treug').style.display='none'
+        
+        html += document.getElementById('start').style.display='block';
+        html += document.getElementById('Treug').style.display='none';
 
-        document.getElementById('1').style.display='none'
-        document.getElementById('statmentNum').style.display='none'
-        document.getElementById('partijenPosition').style.display='none'
+        html += document.getElementById('1').style.display='none';
+        html += document.getElementById('statmentNum').style.display='none';
+        html += document.getElementById('partijenPosition').style.display='none';
+
         
 
     }
@@ -296,38 +303,113 @@ function hideAndDisplay(value){
         let statment = subjects[vragenNummer].statement;
 
          
-        document.getElementById('Treug').style.display='block'
+        html += document.getElementById('Treug').style.display='block';
     
         
         
         
 
         // satments nummer
-        document.getElementById('statmentNum').innerHTML = statmentNum  + " / " + statments.slice(-1);
+        html += document.getElementById('statmentNum').style.display='block';
+        html += document.getElementById('statmentNum').innerHTML = vragenNummer  + " / " + statments.slice(-1);
 
-        document.getElementById('1').style.display='block'
+        html += document.getElementById('1').style.display='block';
 
-        document.getElementById('title').innerHTML    = title
-        document.getElementById('statment').innerHTML = statment
+        html += document.getElementById('title').innerHTML    = title ;
+        html += document.getElementById('statment').innerHTML = statment;
 
-        document.getElementById('partijenFilteren').style.display='none'
+        html += document.getElementById('partijenFilteren').style.display='none';
 
 
         
 
     }else if(vragenNummer == 30){
 
-        document.getElementById('1').style.display='none'
-        document.getElementById('statmentNum').style.display='none'
-        document.getElementById('partijenFilteren').style.display='block'
-        document.getElementById('reultaten').style.display='none'
+        
+        html += document.getElementById('1').style.display='none';
+        html += document.getElementById('statmentNum').style.display='none';
+        
+        
+        html +=  document.getElementById('extraGewichtVragenList').style.display='block' ;
+
+        html += lijst();
 
         
+        
+    }else if(vragenNummer == 31){
+
+        html += document.getElementById('partijenFilteren').style.display='block';
+        html += document.getElementById('reultaten').style.display='none';
+
     }
     
+    saveAntwordenSession();
+    knopVeranderen();
+    console.log(antworden);
     console.log(vragenNummer);
+    return html;
+    
 
     
+}
+
+// ################################################
+
+// Deze functions gaan de kleur van de kiezing knopen veranderen naar blauwe als de gebruiker komt weer bij vragen in dezelfde session die hij heeft al geantwoord
+
+// ################################################
+
+
+function saveAntwordenSession(){   // Deze functie gaat de antworden array in een json onthouden wanner de gebruiker wordt klaar met de verkiezing
+
+    let ant = JSON.parse(sessionStorage.getItem("antworden"));
+
+    return console.log(ant);
+
+}
+
+
+
+function knopVeranderen(){ // Deze functie gaat de session antworden lezen en de knopen veranderen naar blauw 
+
+    let sessionAntwroden = JSON.parse(sessionStorage.getItem("antworden"));
+
+    let html = " ";
+
+    if(sessionAntwroden.length > 0 ){
+
+        if(sessionAntwroden[vragenNummer] == "eens"){
+
+            html +=  document.getElementById("eens").classList = 'w3-button w3-blue';
+
+        }else{
+
+            html +=  document.getElementById("eens").classList = 'w3-button  w3-indigo';
+
+        }
+
+        if(sessionAntwroden[vragenNummer] == "oneens"){
+
+            html +=  document.getElementById("oneens").classList = 'w3-button w3-blue';
+        }else{
+
+            html +=  document.getElementById("oneens").classList = 'w3-button  w3-indigo';
+
+        }
+
+        if(sessionAntwroden[vragenNummer] == "geen"){
+
+            html +=  document.getElementById("geen").classList = 'w3-button w3-blue';
+
+        }else{
+            
+            html +=  document.getElementById("geen").classList = 'w3-button  w3-indigo';
+
+        }
+
+        return html;
+    }
+   
 }
 
 // ################################################
@@ -389,6 +471,28 @@ function watVindDePartijen(){
 
 }
 
+// ################################################
+
+// 
+
+// ################################################
+
+function lijst(){
+
+    let num = 0;
+     
+    html = " ";
+    for(let x in subjects){
+        html += document.getElementById("extraGewichtVragenList").innerHTML =  "<li> " + subjects[num].title + " </li> " ; 
+        console.log(subjects[num].title); 
+        num++;
+    }
+
+    
+    return html;
+}   
+
+
 
 // ################################################
 
@@ -400,23 +504,33 @@ function watVindDePartijen(){
 
 // ################################################
 
-function answerEens(){
-    
-    antworden.push("eens");
+
+function antwordenGeven(value){
+
+    if(value == "eens"){
+        antworden.push("eens");
+    }
+
+    if(value == "oneens"){
+        antworden.push("oneens");
+
+    }
+
+
+    if(value == "geen"){
+        antworden.push("geen");
+
+    }
+
+
     return nextOrback(false);
-    
+
 }
 
-function answerOnEens(){
-    antworden.push("oneens");
-    return nextOrback(false);
-}
 
-function answerGeen(){
-    antworden.push("geen");
-    return nextOrback(false);
-    
-}
+
+
+ 
 
  
 
