@@ -11,13 +11,31 @@
     <style>
 
         body{
+            display:flex; 
+            flex-direction:column;
+            min-height: 100vh;
+            margin:0;
             background-image: url(afbeeldingen/image.png);
             background-repeat: no-repeat;
             background-size: cover;
+
         }
 
-        footer{
+        header{ 
+            min-height:50px; 
+            
+            
+        } 
+         
+        article{ 
 
+            flex:1; 
+        }
+
+
+        footer{
+            min-height:50px; 
+            background:PapayaWhip;
             display: block;
             margin-top: 90px;
             box-shadow: 2px 2px 5px black;
@@ -71,7 +89,7 @@
                 <button  onclick="nextOrback(true)"  class="w3-button  w3-indigo"   > Treug </button>
             </div>
 
-            <div style="display:none" id="1" class="w3-container w3-white w3-margin w3-padding-16">
+            <div style="display:none" id="statments" class="w3-container w3-white w3-margin w3-padding-16">
                  
                 <p id="title" >   </p>
 
@@ -85,7 +103,7 @@
 
                 <button   onclick="nextOrback(false)" class="w3-button  w3-indigo"  >Sla deze vraag over</button>
 
-                <button   onclick="watVindDePartijen()" class="w3-button  w3-indigo"  >Wat vind de partijen </button>
+                <button   onclick="watVindDePartijen()" class="w3-button"  >Wat vind de partijen </button>
 
             </div>
 
@@ -120,10 +138,12 @@
 
                 <button onclick="resultatenTonen()" class="w3-button  w3-indigo"  > Resultaten</button>
             </div>
+
+
             <div style="display:none" id="extraGewichtVragenList"  class="w3-container w3-white w3-margin w3-padding-16" >
 
 
-                <button onclick="nextOrback(false)"  class="w3-button  w3-indigo" >Volgende</button>
+                
 
                 <ul id="extraGewichtVragen">
 
@@ -131,12 +151,14 @@
 
                 </ul>
 
-                
-                
+                <button onclick="nextOrback(false)"  class="w3-button  w3-indigo" >Volgende</button>
 
+        
 
 
             </div>
+
+
             <div style="display:none" id="reultaten"  class="w3-container w3-white w3-margin w3-padding-16" >
 
                 <h2 id="reultaatTitle"></h2>
@@ -145,6 +167,8 @@
 
                 </ul>
             </div>
+
+
         </div>
 
     </article>
