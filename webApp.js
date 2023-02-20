@@ -9,28 +9,113 @@
 
 
 var antworden = []; // Hier worden de antworden opslaan 
+var slaAntworden = [];
 
 function antwordenGeven(value){
 
+    let numIndex = vragenNummer   ;
+
+    
     if(value == "eens"){
-        antworden.push("eens");
+        
+
+        delete_sla_antwoord("antworden");
+
+        
+
+        if(numIndex < antworden.length){
+        
+            antworden[numIndex] = "eens";
+             
+        }else{
+            antworden.push("eens");
+            
+        }
+        
+         
     }
 
     if(value == "oneens"){
-        antworden.push("oneens");
+
+        delete_sla_antwoord("antworden");
+ 
+        if(numIndex < antworden.length){
+        
+            antworden[numIndex] = "oneens";
+             
+        }else{
+
+            antworden.push("oneens");
+             
+        }
+        
 
     }
 
 
     if(value == "geen"){
-        antworden.push("geen");
+
+        delete_sla_antwoord("antworden");
+
+        if(numIndex < antworden.length){
+        
+            antworden[numIndex] = "geen";
+             
+        }else{
+
+
+            antworden.push("geen");
+        }
+         
 
     }
+
+    if(value == "sla"){
+
+        if(numIndex < antworden.length){
+        
+            antworden.splice(numIndex, 1);
+            slaAntworden.push(vragenNummer);
+            window.sessionStorage.setItem("antworden" , JSON.stringify(antworden));
+            
+             
+        }else{
+         
+            slaAntworden.push(vragenNummer);
+        }
+
+    }
+
+   
 
     return nextOrback(false);
 
 }
 
+
+function delete_sla_antwoord(item){   //Dit functie gaat sla over antwoord verwijderen wanner je jouw antwoord veranderd
+
+    if(item == 'antworden'){
+    
+
+        
+        if(slaAntworden.includes(vragenNummer) == true){
+            slaAntworden.splice(vragenNummer, 1);
+        }
+
+    }else{
+
+        let antwoordenLength = antworden.length;
+
+        if(slaAntworden.includes(antwoordenLength)){
+
+            slaAntworden.splice(antwoordenLength , 1);
+
+        }
+    }
+}
+
+ 
 
 
 // ################################################
@@ -44,22 +129,98 @@ function saveAntwordenSession(){   // Deze functie gaat de antworden array in ee
 
     let session = JSON.parse(sessionStorage.getItem("antworden"));
 
-    return;
+    return session;
 
 }
 
+function slaAntwordenSession(){   // Deze functie gaat de antworden array in een json onthouden wanner de gebruiker wordt klaar met de verkiezing
 
+    let slaSession = JSON.parse(sessionStorage.getItem("slaAntworden"));
+
+    return slaSession;
+
+}
+
+ 
 
 function knopVeranderen(){ // Deze functie gaat de session antworden lezen en de knopen veranderen naar blauw 
 
-    let sessionAntwroden = JSON.parse(sessionStorage.getItem("antworden")); // De antworden worden in JSON format opgeslagen
+
+     
+        let sessionAntwroden = JSON.parse(sessionStorage.getItem("antworden")); // De antworden worden in JSON format opgeslagen
+
+        let sessionSlaAntworden =  [];
+        
+        
+        if(JSON.parse(sessionStorage.getItem("slaAntworden")) > 0 ){
+
+            sessionSlaAntworden  = JSON.parse(sessionStorage.getItem("slaAntworden"));
+
+        }
+
+    
+
+    // let formerSessionAntwoorden =   JSON.parse(sessionStorage.getItem("enDantworden")); 
+    // let formerSessionSlaAntworden =   JSON.parse(sessionStorage.getItem("enDslaAntworden")); 
+
+
+    
 
     let html = " ";
 
-    if(sessionAntwroden.length > 0 ){
 
-        if(sessionAntwroden[vragenNummer] == "eens"){
+    console.log("ANTWORDEN LENGTH" , antworden.length);
+    console.log("NUMMER INDEX" ,  vragenNummer);
+        
 
+
+
+    if( antworden[vragenNummer] == "eens"    ){
+
+        html +=  document.getElementById("eens").classList = 'w3-button w3-blue';
+
+    
+    
+    }else{
+
+        html +=  document.getElementById("eens").classList = 'w3-button  w3-indigo';
+
+    }
+
+
+    if(   antworden[vragenNummer] == "oneens"){
+
+        html +=  document.getElementById("oneens").classList = 'w3-button w3-blue';
+
+    
+    
+    }else{
+
+        html +=  document.getElementById("oneens").classList = 'w3-button  w3-indigo';
+
+    }
+
+
+
+    if(  antworden[vragenNummer] == "geen" ){
+
+
+        html +=  document.getElementById("geen").classList = 'w3-button w3-blue';
+
+    
+    
+    }else{
+        
+        html +=  document.getElementById("geen").classList = 'w3-button  w3-indigo';
+
+    }
+
+
+    if(sessionAntwroden.length > 0 &&  antworden.length <= vragenNummer ){
+
+
+        if(sessionAntwroden[vragenNummer] == "eens"  ){
+            
             html +=  document.getElementById("eens").classList = 'w3-button w3-blue';
 
         }else{
@@ -68,17 +229,19 @@ function knopVeranderen(){ // Deze functie gaat de session antworden lezen en de
 
         }
 
-        if(sessionAntwroden[vragenNummer] == "oneens"){
 
+        if(sessionAntwroden[vragenNummer] == "oneens"    ){
+        
             html +=  document.getElementById("oneens").classList = 'w3-button w3-blue';
+
         }else{
 
             html +=  document.getElementById("oneens").classList = 'w3-button  w3-indigo';
 
         }
 
-        if(sessionAntwroden[vragenNummer] == "geen"){
-
+        if(sessionAntwroden[vragenNummer] == "geen" ){
+        
             html +=  document.getElementById("geen").classList = 'w3-button w3-blue';
 
         }else{
@@ -86,9 +249,19 @@ function knopVeranderen(){ // Deze functie gaat de session antworden lezen en de
             html +=  document.getElementById("geen").classList = 'w3-button  w3-indigo';
 
         }
-
-        return html;
     }
+
+    
+   
+
+        
+
+
+    
+  
+    return html;
+    
+
    
 }
 
@@ -461,10 +634,14 @@ function resultatenTonen(){
         html += document.getElementById("reultaatTitle").innerHTML = title ;
         html += document.getElementById("reultaatPartijen").innerHTML = list ;
 
-        window.sessionStorage.setItem("antworden" , JSON.stringify(antworden));
-
         
-        console.log(sessionAntwroden);
+        // window.sessionStorage.setItem("enDantworden" , JSON.stringify(antworden));
+        // window.sessionStorage.setItem("enDslaAntworden" , JSON.stringify(slaAntworden));
+
+        window.sessionStorage.setItem("antworden" , JSON.stringify(antworden));
+        window.sessionStorage.setItem("slaAntworden" , JSON.stringify(slaAntworden));
+        
+        
 
         return html;
     } 
@@ -501,6 +678,8 @@ function nextOrback(value){
 }
 
 
+
+
 function hideAndDisplay(value){
 
     if(value == false){
@@ -525,7 +704,7 @@ function hideAndDisplay(value){
                 // want wanner de gebruiker drukt op treug knop  wordt de vorge statment antwoord verwijdert.
 
 
-                antworden.pop();
+                //antworden.pop()
 
             }
         }
@@ -533,6 +712,7 @@ function hideAndDisplay(value){
         vragenNummer--;
     }
 
+ 
 
     let statments =  statementTelen();
     
@@ -606,11 +786,22 @@ function hideAndDisplay(value){
     }
 
 
-    console.log(antworden);
     
     
-    html += saveAntwordenSession();
+    
+    // window.sessionStorage.setItem("antworden" , JSON.stringify(antworden));
+    // window.sessionStorage.setItem("slaAntworden" , JSON.stringify(slaAntworden));
+
+       
+    console.log("antwoorden " , antworden);
+    console.log("session antwoorden" , JSON.parse(sessionStorage.getItem("antworden")));
+  
+    console.log("vragen nummer : " , vragenNummer);
+    console.log("slaantworden" , slaAntworden);
+    console.log("session slaantworden " , JSON.parse(sessionStorage.getItem("slaAntworden")));
+    
     html += knopVeranderen();
+    
 
     return html;
     
